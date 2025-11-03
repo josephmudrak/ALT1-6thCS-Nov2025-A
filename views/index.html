@@ -1,0 +1,39 @@
+<!-- This is a static file -->
+<!-- served from your routes in server.js -->
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Example</title>
+    <meta charset="utf-8" />
+    <script src="/client.js" defer></script>
+  </head>
+  <body>
+    <header>
+      <h1>
+        A list of users
+      </h1>
+    </header>
+    <main>
+      <h3>Add a new user:</h3>
+      <form>
+        <label>First Name:</label>
+        <input id="firstName" type="text" placeholder="Lionel" /> <br /><br />
+        <label>Surname:</label>
+        <input id="surName" type="text" placeholder="Messi" /> <br /><br />
+
+        <!-- REALLY IMPORTANT to get this to work!! -->
+        <!-- Error in the sample code from JE... missing id="submit-btn" HOK -->
+        <button id="submit-btn" type="submit">Submit</button>
+
+        <!-- found on w3school -->
+        <!--<button id="myBtn" type="button" value="Submit">Submit</button> -->
+      </form>
+      <!-- TUTORIAL D -->
+      <p>Users:</p>
+      <section>
+        <ul id="users"></ul>
+      </section>
+    </main>
+  </body>
+</html>
