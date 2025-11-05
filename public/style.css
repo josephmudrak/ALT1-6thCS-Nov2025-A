@@ -4,3 +4,7 @@
 * {
   background: url("/GetImage.png");
 }
+
+#users li {
+  color: white;
+}
