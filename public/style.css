@@ -1,7 +1,7 @@
 /* styles */
 /* called by your view template */
 
-* {
+body {
   background: url("/GetImage.png");
 }
 
