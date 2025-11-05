@@ -3,8 +3,5 @@
 
 body {
   background: url("/GetImage.png");
-}
-
-#users li {
-  color: white;
+  color: rgb(185, 185, 185);
 }
