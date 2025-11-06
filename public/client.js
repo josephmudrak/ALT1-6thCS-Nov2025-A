@@ -41,7 +41,7 @@ function displayData() {
   // iterate through every row and add it to our page
   users.forEach(function (row) {
     const newListItem = document.createElement("li");
-    newListItem.innerHTML = row["first_name"] + " " + row["surname"];
+    newListItem.innerHTML = row["film_name"] + " " + row["genre"];
     rowList.appendChild(newListItem);
   });
 }
