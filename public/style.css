@@ -2,7 +2,7 @@
 /* called by your view template */
 
 body {
-  background: black;
+  background: url("/GetImage.png");
   color: rgb(255, 255, 255);
   margin: 0;
 }
