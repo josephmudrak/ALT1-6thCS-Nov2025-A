@@ -38,3 +38,6 @@ nav a.right {
 header, main {
   margin: 16px;
 }
+.whatsonbody {
+  background: url("/whatson.png");
+}
