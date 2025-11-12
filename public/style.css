@@ -2,9 +2,12 @@
 /* called by your view template */
 
 body {
-  background: url("/GetImage.png");
   color: rgb(255, 255, 255);
   margin: 0;
+}
+
+.homebody {
+  background: url("/GetImage.png");
 }
 
 nav {
