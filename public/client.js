@@ -2,6 +2,8 @@ console.log("Client-side log HOK");
 // const btn = document.getElementById("submit-btn");
 // btn.addEventListener("click", submitDataToServer);
 
+document.addEventListener("DOMContentLoaded", getFilms);
+
 // Submit clicked so post the data to the server
 function submitDataToServer() {
   console.log("SUBMIT clicked!!!"); // display a message
