@@ -1,6 +1,6 @@
 console.log("Client-side log HOK");
-const btn = document.getElementById("submit-btn");
-btn.addEventListener("click", submitDataToServer);
+// const btn = document.getElementById("submit-btn");
+// btn.addEventListener("click", submitDataToServer);
 
 // Submit clicked so post the data to the server
 function submitDataToServer() {
