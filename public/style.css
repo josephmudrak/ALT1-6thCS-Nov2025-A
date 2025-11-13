@@ -41,3 +41,7 @@ header, main {
 .whatsonbody {
   background: url("/whatson.png");
 }
+
+.main {
+  background-color: #22222244;
+}
