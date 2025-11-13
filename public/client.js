@@ -20,7 +20,7 @@ function submitDataToServer() {
 }
 
 // Make sure to call this function to get latest data
-getDataFromServer();
+// getDataFromServer();
 // Send a request to the server to query the db and send the data back
 function getDataFromServer() {
   console.log("getData()"); // display a debug message
