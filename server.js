@@ -31,6 +31,11 @@ app.get("/whatson.html", function (request, response) {
   response.sendFile(__dirname + "/views/whatson.html");
 });
 
+app.get("/review.html", function (request, response) {
+  console.log("In app.get (/review.html)");
+  response.sendFile(__dirname + "/views/review.html");
+});
+
 // listen for requests :)
 var listener = app.listen(process.env.PORT, function () {
   console.log("Your app is listening on port " + listener.address().port);
