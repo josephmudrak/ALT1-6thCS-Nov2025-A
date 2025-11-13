@@ -25,6 +25,12 @@ app.get("/", function (request, response) {
   console.log("In app.get (/)");
   response.sendFile(__dirname + "/views/index.html");
 });
+
+app.get("/whatson.html", function (request, response) {
+  console.log("In app.get (/whatson.html)");
+  response.sendFile(__dirname + "/views/whatson.html");
+});
+
 // listen for requests :)
 var listener = app.listen(process.env.PORT, function () {
   console.log("Your app is listening on port " + listener.address().port);
@@ -48,6 +54,13 @@ app.post("/putData", function (request, response) {
 // Process the HTTP GET request for /getData
 app.get("/getData", function (request, response) {
   console.log("In app.get (/getData)");
+  db.all("SELECT * FROM Films", function (err, rows) {
+    response.send(JSON.stringify(rows));
+  });
+});
+
+app.get("/getFilms", function (request, response) {
+  console.log("In app.get (/getFilms)");
   db.all("SELECT * FROM Films", function (err, rows) {
     response.send(JSON.stringify(rows));
   });

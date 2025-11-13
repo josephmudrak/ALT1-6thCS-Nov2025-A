@@ -45,3 +45,24 @@ function displayData() {
     rowList.appendChild(newListItem);
   });
 }
+
+function getFilms() {
+  const requestMsg = new XMLHttpRequest();
+  requestMsg.addEventListener("load", displayFilms); // attach a listener
+  requestMsg.open("get", "/getFilms");
+  requestMsg.send();
+}
+
+function displayFilms() {
+  console.log("displayFilms()");
+
+  const filmsTable = document.getElementById("whatson");
+  let films = JSON.parse(this.responseText);
+
+  films.forEach((el) => {
+    console.log(el);
+    const newRow = document.createElement("tr");
+    newRow.innerHTML = `<td>${el["film_name"]}</td><td>${el["genre"]}</td>`;
+    filmsTable.appendChild(newRow);
+  });
+}
