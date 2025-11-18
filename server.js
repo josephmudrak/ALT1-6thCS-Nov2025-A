@@ -61,7 +61,7 @@ app.post("/postReview", function (request, response) {
   let insStr = "INSERT INTO Users (user_name, film_name, review) VALUES (";
   insStr += "'" + request.body.username + "', ";
   insStr += "'" + request.body.film + "', ";
-  insStr += "'" + request.body.review + ");";
+  insStr += "'" + request.body.review + "');";
   db.run(insStr);
 });
 
