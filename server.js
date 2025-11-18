@@ -7,19 +7,6 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json()); // for parsing application/json
 app.use(express.static("public"));
 
-//from chatgpt on 2/10/2025 so that can see what's stored in SQLite d/b on render server.
-// Debug route: show all data in your table
-app.get("/show-data", (req, res) => {
-  db.all("SELECT * FROM Films", [], (err, rows) => {
-    if (err) {
-      console.error("DB error:", err.message);
-      res.status(500).send("Database error");
-      return;
-    }
-    res.json(rows); // Send back all rows as JSON
-  });
-});
-
 // This is called when the app is first started
 app.get("/", function (request, response) {
   console.log("In app.get (/)");
@@ -45,17 +32,6 @@ var listener = app.listen(process.env.PORT, function () {
 const sqlite3 = require("sqlite3").verbose();
 let db = new sqlite3.Database("SQLite.db"); // database name
 
-// Process the HTTP POST request for /putData
-app.post("/putData", function (request, response) {
-  console.log("In app.post (/putData)");
-  // build up insert statement. For example:
-  // insert into person(first_name, surname) values ('Joe', 'Bloggs')
-  let insStr = "INSERT INTO Films (film_name, genre) values (";
-  insStr = insStr + "'" + request.body.fname + "', ";
-  insStr = insStr + "'" + request.body.sname + "') ";
-  db.run(insStr);
-});
-
 app.post("/postReview", function (request, response) {
   console.log("In app.post (/postReview)");
   let insStr = "INSERT INTO Users (user_name, film_name, review) VALUES (";
@@ -63,14 +39,6 @@ app.post("/postReview", function (request, response) {
   insStr += "'" + request.body.film + "', ";
   insStr += "'" + request.body.review + "');";
   db.run(insStr);
-});
-
-// Process the HTTP GET request for /getData
-app.get("/getData", function (request, response) {
-  console.log("In app.get (/getData)");
-  db.all("SELECT * FROM Films", function (err, rows) {
-    response.send(JSON.stringify(rows));
-  });
 });
 
 app.get("/getFilms", function (request, response) {

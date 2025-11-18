@@ -1,6 +1,4 @@
 console.log("Client-side log HOK");
-// const btn = document.getElementById("submit-btn");
-// btn.addEventListener("click", submitDataToServer);
 
 document.addEventListener("DOMContentLoaded", function () {
   getReviews();
@@ -12,25 +10,6 @@ document.addEventListener("DOMContentLoaded", function () {
   const reviewBtn = document.getElementById("submitReview");
   if (reviewBtn) reviewBtn.addEventListener("click", submitReview);
 });
-
-// Submit clicked so post the data to the server
-// Submit clicked so post the data to the server
-function submitDataToServer(event) {
-  // Use the passed event object instead of the deprecated global `event`.
-  if (event && typeof event.preventDefault === "function")
-    event.preventDefault();
-  console.log("SUBMIT clicked!!!"); // display a message
-  // create an object to post to the server
-  // IMPORTANT: ONE NAME - VALUE PAIR FOR EACH FIELD
-  let dataObj = {
-    fname: document.getElementById("firstName").value,
-    sname: document.getElementById("surName").value,
-  };
-  const requestMsg = new XMLHttpRequest();
-  requestMsg.open("post", "/putData", true); // open a HTTP post request
-  requestMsg.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
-  requestMsg.send(JSON.stringify(dataObj));
-}
 
 function submitReview(e) {
   if (e && typeof e.preventDefault === "function") e.preventDefault();
@@ -51,50 +30,20 @@ function submitReview(e) {
   alert("Review submitted successfully.");
 }
 
-// Make sure to call this function to get latest data
-// getDataFromServer();
-// Send a request to the server to query the db and send the data back
-function getDataFromServer() {
-  console.log("getData()"); // display a debug message
-  // request the data from the database
-  const requestMsg = new XMLHttpRequest();
-  requestMsg.addEventListener("load", displayData); // attach a listener
-  requestMsg.open("get", "/getData"); // open a HTTP GET request
-  requestMsg.send();
-}
-
-function displayData() {
-  console.log("displayData()");
-  // define variables that reference elements on our page
-  const rowList = document.getElementById("users");
-  rowList.innerHTML = ""; // clear all the list items
-  // parse our response to convert to JSON
-  let users = JSON.parse(this.responseText);
-  // iterate through every row and add it to our page
-  users.forEach(function (row) {
-    const newListItem = document.createElement("li");
-    newListItem.innerHTML = row["film_name"] + " " + row["genre"];
-    rowList.appendChild(newListItem);
-  });
-}
-
 function displayReviews() {
   const reviewList = document.getElementById("reviewList");
   reviewList.innerHTML = "";
 
   let reviews = JSON.parse(this.responseText);
   reviews.reverse(); // Show newest reviews first
-  console.log(reviews);
 
   reviews.forEach(function (row) {
     const header = document.createElement("h2");
     header.innerHTML =
       row["user_name"] + ` reviewed <em>${row["film_name"]}</em>:`;
-    console.log(header);
 
     const reviewText = document.createElement("p");
     reviewText.innerHTML = row["review"];
-    console.log(reviewText);
 
     reviewList.appendChild(header);
     reviewList.appendChild(reviewText);
