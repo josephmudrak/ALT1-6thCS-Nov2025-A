@@ -3,6 +3,7 @@ console.log("Client-side log HOK");
 // btn.addEventListener("click", submitDataToServer);
 
 document.addEventListener("DOMContentLoaded", function () {
+  getReviews();
   getFilms();
   populateFilms();
 
@@ -73,6 +74,21 @@ function displayData() {
     newListItem.innerHTML = row["film_name"] + " " + row["genre"];
     rowList.appendChild(newListItem);
   });
+}
+
+function displayReviews() {
+  const reviewList = document.getElementById("reviewList");
+  reviewList.innerHTML = "";
+
+  let reviews = JSON.parse(this.responseText);
+  console.log(reviews);
+}
+
+function getReviews() {
+  const requestMsg = new XMLHttpRequest();
+  requestMsg.addEventListener("load", displayReviews);
+  requestMsg.open("get", "/getReviews");
+  requestMsg.send();
 }
 
 function getFilms() {

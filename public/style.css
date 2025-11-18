@@ -50,3 +50,7 @@ main {
 textarea {
   resize: none;
 }
+
+main a {
+  color: #fb0092;
+}
