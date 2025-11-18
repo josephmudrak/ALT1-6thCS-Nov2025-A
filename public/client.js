@@ -2,7 +2,10 @@ console.log("Client-side log HOK");
 // const btn = document.getElementById("submit-btn");
 // btn.addEventListener("click", submitDataToServer);
 
-document.addEventListener("DOMContentLoaded", getFilms);
+document.addEventListener("DOMContentLoaded", function () {
+  getFilms();
+  populateFilms();
+});
 
 // Submit clicked so post the data to the server
 function submitDataToServer() {
@@ -67,4 +70,44 @@ function displayFilms() {
     newRow.innerHTML = `<td>${el["film_name"]}</td><td>${el["genre"]}</td>`;
     filmsTable.appendChild(newRow);
   });
+}
+
+function populateFilms() {
+  const requestMsg = new XMLHttpRequest();
+
+  requestMsg.addEventListener("load", function () {
+    const sel = document.getElementById("filmSelect");
+    if (!sel) return;
+
+    sel.innerHTML = "";
+
+    try {
+      const films = JSON.parse(this.responseText);
+      if (!Array.isArray(films) || films.length === 0) {
+        const opt = document.createElement("option");
+        opt.value = "";
+        opt.textContent = "No films available";
+        sel.appendChild(opt);
+        return;
+      }
+
+      films.forEach((f) => {
+        const opt = document.createElement("option");
+        opt.value = f.film_name;
+        opt.textContent = f.film_name + (f.genre ? " (" + f.genre + ")" : "");
+        sel.appendChild(opt);
+      });
+    } catch (e) {
+      // Parsing or other error
+      sel.innerHTML = "";
+      const opt = document.createElement("option");
+      opt.value = "";
+      opt.textContent = "Error loading films";
+      sel.appendChild(opt);
+      console.error("populateFilmSelect error:", e);
+    }
+  });
+
+  requestMsg.open("GET", "/getFilms");
+  requestMsg.send();
 }
