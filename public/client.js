@@ -84,14 +84,17 @@ function displayReviews() {
 
   let reviews = JSON.parse(this.responseText);
   reviews.reverse(); // Show newest reviews first
+  console.log(reviews);
 
   reviews.forEach(function (row) {
     const header = document.createElement("h2");
     header.innerHTML =
       row["user_name"] + ` reviewed <em>${row["film_name"]}</em>:`;
+    console.log(header);
 
     const reviewText = document.createElement("p");
     reviewText.innerHTML = row["review"];
+    console.log(reviewText);
 
     reviewList.appendChild(header);
     reviewList.appendChild(reviewText);
