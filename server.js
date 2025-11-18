@@ -56,6 +56,14 @@ app.post("/putData", function (request, response) {
   db.run(insStr);
 });
 
+app.post("/postReview", function (request, response) {
+  console.log("In app.post (/postReview)");
+  let insStr = "INSERT INTO Users (user_name, film_name, review) VALUES (";
+  insStr += "'" + request.body.username + "', ";
+  insStr += "'" + request.body.film + "', ";
+  insStr += "'" + request.body.review + ");";
+});
+
 // Process the HTTP GET request for /getData
 app.get("/getData", function (request, response) {
   console.log("In app.get (/getData)");
@@ -67,6 +75,13 @@ app.get("/getData", function (request, response) {
 app.get("/getFilms", function (request, response) {
   console.log("In app.get (/getFilms)");
   db.all("SELECT * FROM Films", function (err, rows) {
+    response.send(JSON.stringify(rows));
+  });
+});
+
+app.get("/getReviews", function (request, response) {
+  console.log("In app.get (/getReviews)");
+  db.all("SELECT * FROM Users", function (err, rows) {
     response.send(JSON.stringify(rows));
   });
 });

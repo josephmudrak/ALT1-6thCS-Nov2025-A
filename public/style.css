@@ -35,7 +35,8 @@ nav a.right {
   float: right;
 }
 
-header, main {
+header,
+main {
   margin: 16px;
 }
 .whatsonbody {
@@ -44,4 +45,8 @@ header, main {
 
 main {
   background-color: #222222cc;
+}
+
+textarea {
+  resize: none;
 }

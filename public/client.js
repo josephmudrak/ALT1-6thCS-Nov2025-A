@@ -5,10 +5,19 @@ console.log("Client-side log HOK");
 document.addEventListener("DOMContentLoaded", function () {
   getFilms();
   populateFilms();
+
+  // event is deprecated - avoiding
+  // Attach handlers here so the event object is passed to the callbacks
+  const reviewBtn = document.getElementById("submitReview");
+  if (reviewBtn) reviewBtn.addEventListener("click", submitReview);
 });
 
 // Submit clicked so post the data to the server
-function submitDataToServer() {
+// Submit clicked so post the data to the server
+function submitDataToServer(event) {
+  // Use the passed event object instead of the deprecated global `event`.
+  if (event && typeof event.preventDefault === "function")
+    event.preventDefault();
   console.log("SUBMIT clicked!!!"); // display a message
   // create an object to post to the server
   // IMPORTANT: ONE NAME - VALUE PAIR FOR EACH FIELD
@@ -16,11 +25,26 @@ function submitDataToServer() {
     fname: document.getElementById("firstName").value,
     sname: document.getElementById("surName").value,
   };
-  // JUST USE THESE LINES AS THEY ARE - NO NEED TO CHANGE
-  event.preventDefault(); // prevents 2 calls to this function!!
   const requestMsg = new XMLHttpRequest();
   requestMsg.open("post", "/putData", true); // open a HTTP post request
   requestMsg.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
+  requestMsg.send(JSON.stringify(dataObj));
+}
+
+function submitReview(e) {
+  if (e && typeof e.preventDefault === "function") e.preventDefault();
+
+  console.log("Submitted new review");
+
+  let dataObj = {
+    username: document.getElementById("username").value,
+    film: document.getElementById("filmSelect").value,
+    review: document.getElementById("review").value,
+  };
+
+  const requestMsg = new XMLHttpRequest();
+  requestMsg.open("post", "/postReview", true);
+  requestMsg.setRequestHeader("Content-Type", "application/json");
   requestMsg.send(JSON.stringify(dataObj));
 }
 
@@ -94,7 +118,7 @@ function populateFilms() {
       films.forEach((f) => {
         const opt = document.createElement("option");
         opt.value = f.film_name;
-        opt.textContent = f.film_name + (f.genre ? " (" + f.genre + ")" : "");
+        opt.textContent = f.film_name;
         sel.appendChild(opt);
       });
     } catch (e) {
