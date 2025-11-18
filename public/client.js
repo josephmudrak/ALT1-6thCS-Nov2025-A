@@ -47,6 +47,8 @@ function submitReview(e) {
   requestMsg.open("post", "/postReview", true);
   requestMsg.setRequestHeader("Content-Type", "application/json");
   requestMsg.send(JSON.stringify(dataObj));
+
+  alert("Review submitted successfully.");
 }
 
 // Make sure to call this function to get latest data

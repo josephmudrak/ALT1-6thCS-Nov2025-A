@@ -62,6 +62,7 @@ app.post("/postReview", function (request, response) {
   insStr += "'" + request.body.username + "', ";
   insStr += "'" + request.body.film + "', ";
   insStr += "'" + request.body.review + ");";
+  db.run(insStr);
 });
 
 // Process the HTTP GET request for /getData
