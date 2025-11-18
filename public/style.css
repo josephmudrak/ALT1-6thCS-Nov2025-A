@@ -27,7 +27,8 @@ nav a:hover {
   background-color: #222222cc;
 }
 
-nav a.active {
+nav a.active,
+thead {
   background: #fb0092;
   font-weight: bold;
 }
@@ -53,4 +54,8 @@ textarea {
 
 main a {
   color: #fb0092;
+}
+
+table {
+  border-spacing: 10px;
 }
