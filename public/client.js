@@ -83,7 +83,19 @@ function displayReviews() {
   reviewList.innerHTML = "";
 
   let reviews = JSON.parse(this.responseText);
-  console.log(reviews);
+  reviews.reverse(); // Show newest reviews first
+
+  reviews.forEach(function (row) {
+    const header = document.createElement("h2");
+    header.innerHTML =
+      row["user_name"] + ` reviewed <em>${row["film_name"]}</em>:`;
+
+    const reviewText = document.createElement("p");
+    reviewText.innerHTML = row["review"];
+
+    reviewList.appendChild(header);
+    reviewList.appendChild(reviewText);
+  });
 }
 
 function getReviews() {
